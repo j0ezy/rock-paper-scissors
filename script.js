@@ -16,5 +16,15 @@ function getComputerChoice(){
     return randomChoiceName
 }
 
-let randomChoice = getComputerChoice();
+function getHumanChoice(){
+    let humanChoice = prompt("Enter your choice(Rock, Paper or Scissors)").toLowerCase();
+    if(!(humanChoice === "rock" || humanChoice === "scissors" || humanChoice === "paper")){
+        alert("Wrong input")
+    }
+    return humanChoice;
+}
+
+let randomChoice = getComputerChoice().toLowerCase();
+let humanChoice = getHumanChoice().toLowerCase();
 console.log(randomChoice)
+console.log(humanChoice)
