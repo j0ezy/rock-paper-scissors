@@ -26,52 +26,60 @@ function getHumanChoice(){
 }
 
 // play one round of Rock Paper Scissors
-function playRound(){
+function playRound(humanChoice){
 
     let randomChoice = getComputerChoice().toLowerCase();
-    let humanChoice = getHumanChoice().toLowerCase();
     let score = null;
+
+    const displayText = document.querySelector("#display")
+
+    if(displayText.lastElementChild){
+        displayText.removeChild(displayText.lastElementChild)
+    }
+
+    const childNode = document.createElement("p")
+    displayText.appendChild(childNode)
 
     if(randomChoice === "rock"){
         switch(humanChoice){
             case "rock":
-                console.log("It's a tie! You both choose rock")
+                childNode.textContent = "It's a tie! You both choose rock"
                 break;
             case "paper":
-                console.log("You win! Paper beats rock")
+                childNode.textContent = "You win! Paper beats rock"
                 score = true;
                 break;
             case "scissors":
-                console.log("You lose! Scissors loses to rock")
+                childNode.textContent = "You lose! Scissors loses to rock"
                 score = false;
                 break;
         }
     }else if (randomChoice === "paper"){
         switch(humanChoice){
             case "rock":
-                console.log("You lose! Rock loses to paper")
+                childNode.textContent = "You lose! Rock loses to paper"
                 score = false;
                 break;
             case "paper":
-                console.log("It's a tie! You both choose paper")
+                childNode.textContent = "It's a tie! You both choose paper"
                 break;
             case "scissors":
-                console.log("You win! Scissors beat paper")
+                childNode.textContent = "You win! Scissors beat paper"
                 score = true;
                 break;
         }
     }else if (randomChoice === "scissors"){
         switch(humanChoice){
             case "rock":
-                console.log("You win! Rock beat scissors")
+                childNode.textContent = "You win! Rock beat scissors"
                 score = true;
                 break;
             case "paper":
-                console.log("You lose! Scissors lose to paper")
+                childNode.textContent = "You lose! Paper loses to scissors"
                 score = false;
                 break;
             case "scissors":
-                console.log("It's a tie! You both choose scissors")
+                childNode.textContent = "It's a tie! You both choose scissors"
                 break;
         }
     }else{
@@ -84,65 +92,18 @@ function playRound(){
     return score
 }
 
-//plays the whole game which is 5 rounds
-function playGame(){
+const btnRock = document.querySelector("#rock")
+const btnPaper = document.querySelector("#paper")
+const btnScissors = document.querySelector("#scissors")
 
-    let computerScore = 0;
-    let humanScore = 0;
-    let ties = 0;
-
-    let round1 = playRound()
-    console.log(round1)
-    if(round1 === true){
-        humanScore++
-    }else if (round1 === false){
-        computerScore++
-    }else{
-        ties++
-    }
-    let round2 = playRound()
-    console.log(round2)
-    if(round2 === true){
-        humanScore++
-    }else if (round2 === false){
-        computerScore++
-    }else{
-        ties++
-    }
-    let round3 = playRound()
-    console.log(round3)
-    if(round3 === true){
-        humanScore++
-    }else if (round3 === false){
-        computerScore++
-    }else{
-        ties++
-    }
-    let round4 = playRound()
-    console.log(round4)
-    if(round4 === true){
-        humanScore++
-    }else if (round4 === false){
-        computerScore++
-    }else{
-        ties++
-    }
-    let round5 = playRound()
-    console.log(round5)
-    if(round5 === true){
-        humanScore++
-    }else if (round5 === false){
-        computerScore++
-    }else{
-        ties++
-    }
-    console.log("Score is: ")
-    console.log("Computer: " + computerScore)
-    console.log("Player: " + humanScore)
-    console.log("Ties: " + ties)
-
-}
-
-playGame();
+btnRock.addEventListener("click", () =>{
+    playRound("rock")
+})
+btnPaper.addEventListener("click", () =>{
+    playRound("paper")
+})
+btnScissors.addEventListener("click", () =>{
+    playRound("scissors")
+})
 
 
