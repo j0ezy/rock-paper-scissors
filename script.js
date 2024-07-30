@@ -92,18 +92,73 @@ function playRound(humanChoice){
     return score
 }
 
+function scoreHandler(result){
+
+    if(result){
+        humanScore++
+    } 
+    if (result === false){
+        computerScore++
+    }
+    scoreText.textContent = `${humanScore} ${computerScore}`
+    if(computerScore === 5){
+        const finalMessage = document.querySelector("#score")
+        const finalMessageText = document.createElement("p")
+        finalMessageText.setAttribute("id","final")
+        finalMessage.appendChild(finalMessageText)
+        finalMessageText.textContent = "You Lose"
+        humanScore = 0
+        computerScore = 0
+    }
+    if(humanScore === 5){
+        const finalMessage = document.querySelector("#score")
+        const finalMessageText = document.createElement("p")
+        finalMessageText.setAttribute("id","final")
+        finalMessage.appendChild(finalMessageText)
+        finalMessageText.textContent = "You Win"
+        humanScore = 0
+        computerScore = 0
+    }
+}
+
+function removeScore(){
+    if(document.querySelector("#final")){
+        document.querySelector("#final").remove()
+    }  
+}
+const displayScore = document.querySelector("#score")
+const scoreText = document.createElement("p")
+displayScore.appendChild(scoreText)
+
+let humanScore = 0
+let computerScore = 0
+
 const btnRock = document.querySelector("#rock")
 const btnPaper = document.querySelector("#paper")
 const btnScissors = document.querySelector("#scissors")
 
 btnRock.addEventListener("click", () =>{
-    playRound("rock")
+    let result = playRound("rock")
+    if (humanScore === 0 && computerScore === 0){
+        removeScore()
+    }
+    scoreHandler(result)
+    
 })
 btnPaper.addEventListener("click", () =>{
-    playRound("paper")
+    let result = playRound("paper")
+    if (humanScore === 0 && computerScore === 0){
+        removeScore()
+    }
+    scoreHandler(result)
 })
 btnScissors.addEventListener("click", () =>{
-    playRound("scissors")
+    let result = playRound("scissors")
+    if (humanScore === 0 && computerScore === 0){
+        removeScore()
+    }
+    scoreHandler(result)
 })
 
+scoreText.textContent = `${humanScore} ${computerScore}`
 
